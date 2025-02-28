@@ -1,55 +1,50 @@
+public class Alumno { //Los identificadores (nombres) de las clases comienzan por MAY y van en singular
 
-public class Alumno {
-
-    //Atributos
-    private String DNI;
+    private String DNI;  //Atributos de instancia: son aquellos atributos de los que cada objeto va a tener un valor
     private int NP;
     private String nombreCompleto;
 
-    public Alumno() {//metodo constructor por defecto
-                     //Si no se indica nada se asignan valores por defecto
-        DNI = "00000000A";
+    public Alumno() { //Metodo constructor por defecto
+        //Si no se indica nada, se asignan valores por defecto
+        DNI = "00.000.000-E";
         NP = 0;
         nombreCompleto = "Nombre Apellido1 Apellido2";
     }
 
-
-    public Alumno(String DNIp, int NPp, String nombreCompletop) throws IllegalAccessException {
-
-        char primerDigito = DNI.charAt(0);
-        if (Character.isDigit(primerDigito)){
-            throw new IllegalAccessException("DNI incorrecto");
+    public Alumno(String DNIp, int NPp, String nc) {
+        char primerDigito = DNIp.charAt(0);
+        if (!Character.isDigit(primerDigito)) {
+            throw new IllegalArgumentException("DNI incorrecto");
         }
-        if (NPp <= 0){
-            throw new IllegalAccessException("NP incorrecto");
+        if (NPp < 0) {
+            throw new IllegalArgumentException("NP incorrecto");
         }
         DNI = DNIp;
         NP = NPp;
-        nombreCompleto = nombreCompletop;
+        nombreCompleto = nc;
     }
-
 
     public String getDNI() {
         return DNI;
     }
 
-    public void setDNI(String DNI)  throws IllegalAccessException {
-        this.DNI = DNI;
+    public void setDNI(String DNI) {
         char primerDigito = DNI.charAt(0);
-        if (Character.isDigit(primerDigito)){
-            throw new IllegalAccessException("DNI incorrecto");
+        if (!Character.isDigit(primerDigito)) {
+            throw new IllegalArgumentException("DNI incorrecto");
         }
+        this.DNI = DNI;
     }
 
     public int getNP() {
         return NP;
     }
 
-    public void setNP(int NP) throws IllegalAccessException {
-        this.NP = NP;
-        if (NPp <= 0){
-            throw new IllegalAccessException("NP incorrecto");
+    public void setNP(int NP) {
+        if (NP < 0) {
+            throw new IllegalArgumentException("DNI incorrecto");
         }
+        this.NP = NP;
     }
 
     public String getNombreCompleto() {
@@ -60,9 +55,15 @@ public class Alumno {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public void mostrarDatos(){
-        System.out.println("DNI: " + DNI);
-        System.out.println("NP: " + NP);
-        System.out.println("Nombre Completo: " + nombreCompleto);
+    @Override
+    public String toString() {
+        return "Alumno{" +
+                "DNI='" + DNI + '\'' +
+                ", NP=" + NP +
+                ", nombreCompleto='" + nombreCompleto + '\'' +
+                '}';
     }
+
+
+
 }
